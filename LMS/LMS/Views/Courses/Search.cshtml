@@ -1,0 +1,77 @@
+﻿@model LMS.Models.CourseSearchViewModel
+@using System.Text
+@using LMS.HtmlHelpers
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_landing.cshtml";
+}
+
+<h2>Пошук</h2>
+@using (Html.BeginForm())
+{
+    <input type="search" name="query" id="searchId" value= "@ViewBag.Query"/>
+    <input type="submit" name="search" value="search" />
+    <input type="submit" name="search" value="tags"/>
+    <input type="submit" name="search" value="names"/>
+    @Html.Label("View all courses")
+    @Html.CheckBox("showAll", false)
+}
+<div class="container">
+    <div class="row">
+
+
+
+
+        @*Колонка курсу*@
+
+        @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <a href="#" class="thumbnail_catalog">
+                    <div class="catalog-img center-block">
+                        <img src="@Model.Courses.ElementAt(i).Image"  class="img-circle center-block" width="160" height="160">
+                    </div>
+                    <div class="text-center">
+                        <h3></h3>
+                        <div class="up_bloc">
+                        </div>
+
+
+                        <h3> <span class=" text_hover"></span></h3>
+
+                    </div>
+                </a>
+            </div>*@
+        @for (Int32 i = 0; i < Model.Courses.Count(); i++)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <a href="~/Courses/Details/@Model.Courses.ElementAt(i).ID" style="text-decoration:none;" class="thumbnail_one">
+                    <div class="badge-img center-block">
+                        <img src="@Model.Courses.ElementAt(i).Image" class="img-circle center-block" width="169" height="169">
+                    </div>
+
+                    <div class="up_bloc">
+
+                    </div>
+                    <h2>@Html.DisplayFor(modelItem => Model.Courses.ElementAt(i).Title)</h2>
+
+                </a>
+            </div>
+        }
+        @if (User.IsInRole("Admin") || User.IsInRole("CourseManager"))
+        {
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <a href="~/Courses/Create/" style="text-decoration:none;" class="thumbnail_one">
+                    <div class="badge-img center-block">
+                        <img src="~/Content/img/ww.png" class="img-circle center-block" width="169" height="169">
+                    </div>
+                    <div class="up_bloc">
+
+                    </div>
+                    <h3>Новий курс</h3>
+                </a>
+            </div>
+        }
+
+
+    </div>
+</div>
+@Html.AddPageLinks(Model.PInfo, "aaa", x => Url.Action("Search", new { search = ViewBag.Search, query = ViewBag.Query, showAll = ViewBag.ShowAll, currentPage = x - 1 }))

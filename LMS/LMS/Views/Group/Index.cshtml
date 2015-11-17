@@ -1,0 +1,70 @@
+﻿@model IEnumerable<LMS.Models.Group>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_GroupTest.cshtml";
+}
+<div class="header_title">
+    <h3>Групи</h3>
+</div>
+<p>
+    
+</p>
+<div class="form_style">
+    <button class="btn btn-default btn-sm">
+    @Html.ActionLink("Створити нову", "Create")
+</button>
+<table class="ui inverted green table">
+   <tr>
+    <th>
+        @Html.DisplayName("Назва")
+    </th>
+    <th>
+        @Html.DisplayName("Початок")
+    </th>
+    <th>
+        @Html.DisplayName("Кінець")
+    </th>
+    <th>
+        @Html.DisplayName("Курс")
+    </th>
+    <th>
+        @Html.DisplayName("Дії")
+    </th>
+</tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Finish)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Title)
+        </td>
+        <td>
+            <button class="btn btn-default btn-sm">
+                @Html.ActionLink("Редагувати", "Edit", new { id = item.ID })
+            </button>
+            <button class="btn btn-default btn-sm">
+                @Html.ActionLink("Інфо", "Details", new { id = item.ID })
+            </button> 
+            <button class="btn btn-default btn-sm">  
+            @Html.ActionLink("Видалити", "Delete", new { id = item.ID })
+            </button>
+        </td>
+    </tr>
+}
+
+</table>
+    @if (Model == null || Model.Count() == 0)
+    {
+        @Html.DisplayName("Немає жодної групи");
+    }
+</div>

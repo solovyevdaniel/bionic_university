@@ -1,0 +1,97 @@
+﻿@model LMS.Models.Group
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_GroupTest.cshtml";
+}
+
+
+<!-- Custom CSS -->
+<link href="@Url.Content("~/Content/css/round-about.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/landing-page.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/bootstrap-datetimepicker.css")" rel="stylesheet" type="text/css">
+
+@*form design*@
+<link href="@Url.Content("~/Content/css/form_edit.css")" rel="stylesheet" type="text/css">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="header_title">
+        <h4>Нова група</h4>
+    </div>
+
+    <div class="form-horizontal form_style ">
+        
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <div class="col-md-5">
+                @if (ViewBag.Error != null)
+                {
+                    @Html.DisplayName(ViewBag.Error as String);
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Назва", new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+       
+
+        <div class="form-group">
+            @Html.Label("Початок занять", new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                <input class="form-control text-box single-line" id='start' data-val="false" data-val-date="The field Start must be a date." name="Start" type="datetime">
+                @Html.ValidationMessageFor(model => model.Start)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Кінець занять", new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                <input class="form-control text-box single-line" id='finish' data-val="false" data-val-date="The field Finish must be a date." name="Finish" type="datetime">
+                @Html.ValidationMessageFor(model => model.Finish)
+            </div>
+        </div>
+
+
+
+        @*Каждая такая группа создается с USerState_ID = 4*@
+        @Html.Hidden("UserState_ID")
+        @Html.Hidden("Course_ID")
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <button class="btn btn-default btn-sm">
+        @Html.ActionLink("До списку", "Index")
+    </button>
+    
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+   <script type="text/javascript">
+    $(document).ready(function () {
+        $("#start").datetimepicker({
+            format: "DD.MM.YYYY HH:mm"
+        })
+    });
+    $(document).ready(function () {
+        $("#finish").datetimepicker({
+            format: "DD.MM.YYYY HH:mm"
+        })
+    });
+</script>
+    }

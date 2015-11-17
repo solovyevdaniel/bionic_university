@@ -1,0 +1,12 @@
+﻿@using LMS.Models
+@model IEnumerable<ApplicationUser>
+@{
+    ViewBag.Title = "ApplyUsers";
+}
+
+@foreach (var us in Model)
+{
+    @Html.Label(us.UserName)
+    @Html.DropDownList("stats", ViewBag.UserStats as SelectList)
+    
+}

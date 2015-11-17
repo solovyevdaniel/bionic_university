@@ -1,0 +1,105 @@
+﻿@model LMS.Models.CourseViewModel
+@using LMS.Models
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using LMS.HtmlHelpers
+@Html.AddCKSource("/Scripts/ckeditor/ckeditor.js")
+<script src="/Scripts/jquery-1.10.2.js"></script>
+<script src="/Scripts/bootstrap.js"></script>
+<script src="/Scripts/ImageShow.js"></script>
+<script src="@Url.Content("~/Scripts/CourseInputCheck.js")"></script>
+<link href="@Url.Content("~/Content/css/form_edit.css")" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/Scripts/selectize/css/selectize.default.css">
+<script src="http://brianreavis.github.io/selectize.js/js/selectize.js"></script>
+
+
+
+<p>@ViewBag.ErrorMessage</p>
+<div class="header_title">
+    <h3>Створити курс</h3>
+
+    
+</div>
+@using (Html.BeginForm("Create", "Courses", FormMethod.Post, new { enctype = "multipart/form-data", id = "courseForm" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Image" value="/images/easyStudy.jpg" />
+    <div class="form-horizontal form_style">
+       
+        @Html.ValidationSummary(true)
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CourseElement.Title, new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.CourseElement.Title, null, "Title")
+                        @Html.ValidationMessageFor(model => model.CourseElement.Title)
+                    </div>
+                </div>
+                @*<div class="form-group">
+                        @Html.Label("Image preView", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <img id="blah" src="/images/easyStudy.jpg" alt="courseImage" />
+                        </div>
+                    </div>*@
+                <div class="form-group">
+                    @Html.Label("Локальне зображення", new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                       
+                           <input  type="file" name="file" id="file" accept="image/*" onchange="readURL(this)" />
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("URL зображення", new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBox("fileSite", null, new { onchange = "readURLText(this.value)" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @*@Html.Label("Image preView", new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        <img id="blah" src="/images/easyStudy.jpg" alt="courseImage" width="169" height="169"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseElement.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.AddCKWithText("Description", Model.CourseElement.Description)
+                @Html.ValidationMessageFor(model => model.CourseElement.Description)
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            @Html.Label("Теги", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("tags", Model.TagsNamesToString())
+                @Html.ValidationMessage("tags")
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-4">
+                <input type="submit" value="Створити" class="button button-block" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("До списку", "Index")
+    @Html.AddSelectizeTagsTextScript("tags", Model.Tags)
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

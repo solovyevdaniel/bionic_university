@@ -1,0 +1,57 @@
+﻿@model LMS.Models.Course
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header_title">
+    <h3>Дійсно видалити цей курс?</h3>
+</div>
+
+<div class="form-horizontal form_style">
+    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Назва")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayName("Зображення")
+        </dt>
+
+        <dd>
+            <img src="@Model.Image" height="200" width="150" />
+        </dd>
+        <dt>
+            @Html.DisplayName("Опис")
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Description)
+        </dd>
+
+       
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-4">
+            <input type="submit" value="Видалити" class="btn btn-default" />
+           
+        </div>
+        </div>
+    }
+</div>
+<nav>
+    <ul class="pager">
+        <li class="previous">@Html.ActionLink("Список курсів", "Index")</li>
+        
+    </ul>
+</nav>

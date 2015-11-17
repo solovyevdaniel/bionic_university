@@ -1,0 +1,215 @@
+﻿@model LMS.Models.CourseViewModel
+@using System.Text
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using LMS.HtmlHelpers
+
+<link href="@Url.Content("~/Content/css/Profil/jquery-ui.css")" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="@Url.Content("~/Content/css/Profil/sb-admin.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/table.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/table.min.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/semantic.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/semantic.min.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/checkbox.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/checkbox.min.css")" rel="stylesheet" type="text/css">
+                               
+<!-- Morris Charts CSS -->      
+<link href="@Url.Content("~/Content/css/Profil/morris.css")" rel="stylesheet" type="text/css">
+<!--login-->                    
+<link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/css/normalize.css")" rel="stylesheet">
+<!--end login-->                
+<link href="@Url.Content("~/Content/css/courseStyle.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/fonts/flaticon.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" type="text/css">
+<!-- Bootstrap Core CSS -->     
+<link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
+<script src="/Scripts/ImageShow.js"></script>
+<!-- Custom CSS -->
+@*<link href="@Url.Content("~/Cont/css/round-about.css")" rel="stylesheet" type="text/css">*@
+
+<link href="@Url.Content("~/Content/css/landing-page.css")" rel="stylesheet" type="text/css">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="fon_header">
+                <div class="course_bloc_header">
+                    <h1>@Html.DisplayFor(model => model.CourseElement.Title)</h1>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div><div class="container">
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="thumbnail_text_course">
+                    <div class="text_course">
+                        <h2>@Html.DisplayNameFor(model => model.CourseElement.Description)</h2>
+                        <hr>
+                        @Html.Raw(Model.CourseElement.Description)
+                    </div>
+                </div>
+                <div class="thumbnail_text_course">
+
+                    <div class="text_course">
+                        
+                    @if(Model.CourseElement.Topics.Count!=0) { 
+                        <h2>Теми</h2>
+                    }
+                    else
+                    {
+                        <h2>Теми відсутні.</h2>
+                    }
+                        <hr>
+                            
+                        <dl class="dl-horizontal">
+                            
+                            @if (Model.CourseElement.Topics.Count != 0)
+                            {
+                                foreach (var i in Model.CourseElement.Topics)
+                                {
+                                    <dt><span class="title_font">@i.Title: </span></dt>
+                                    <dd>
+                                        @Html.Raw(@i.Description)
+                                        
+                                    </dd>
+                                    
+                                }
+                            }
+                        </dl>
+@if (!User.IsInRole("Learner") && User.Identity.IsAuthenticated)
+{
+                        @Html.ActionLink("Додати тему", "Create", "Topics", routeValues: new { id = Model.CourseElement.ID }, htmlAttributes: null)
+}
+                    </div>
+@if (!User.IsInRole("Learner") && User.Identity.IsAuthenticated)
+{
+    <nav>
+        <ul class="pager">
+            <li>@Html.ActionLink("До списку", "Index")</li>
+            <li>@Html.ActionLink("Редагувати", "Edit", new { id = Model.CourseElement.ID })</li>
+            <li>@Html.ActionLink("Видалити", "Delete", new { id = Model.CourseElement.ID })</li>
+        </ul>
+    </nav>        
+}
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+                <div class="thumbnail_course">
+                    <div class="course-img center-block">
+                        <img src="@Model.CourseElement.Image" class="img-circle_course center-block" width="200" height="200">
+                    </div>
+                    @if (User.IsInRole("Admin") || User.IsInRole("CourseManager"))
+                    {
+                        if (Model.CourseElement.Topics.Count != 0)
+                        {
+                        @Html.ActionLink("Теми", "Index", "Topics", routeValues: new { id = Model.CourseElement.ID }, htmlAttributes: new { @class = " btn btn-primary btn-lg btn-block active button_location", role = "button" })
+                        }
+                             @Html.ActionLink("Створити групу", "Create", "Group", routeValues: new { id = Model.CourseElement.ID }, htmlAttributes: new { @class = " btn btn-primary btn-lg btn-block active button_location", role = "button" })
+                    }
+                    else if (User.IsInRole("Learner") || User.IsInRole("Teacher"))
+                    {
+                    @Html.ActionLink("Приєднатися", "Join", new { userName = User.Identity.Name, id = Model.CourseElement.ID }, new { @class = " btn btn-primary btn-lg btn-block active button_location", role = "button" }) 
+
+                    }
+                    @if (ViewBag.Join != null)
+                    {
+                        <p>@ViewBag.Join</p>
+                    }
+                    <h3><span class="title_font">Основні теги</span></h3>
+                        <ul class="fa-ul">
+                            <li><i class="fa-li fa fa-calendar"></i>@Model.TagsNamesToString(' ') </li>
+                        </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<h2>Details</h2>
+
+<div>
+    <h4>Course</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseElement.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseElement.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Course Image")
+        </dt>
+
+        <dd>
+            <img src="@Model.CourseElement.Image" alt="Smiley face" height="200" width="150">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseElement.Description)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.CourseElement.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseElement.Formula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseElement.Formula)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+        <dd>
+            @if (Model.CourseElement.CourseTags != null)
+            {
+                StringBuilder sBuild = new StringBuilder();
+                foreach (var i in Model.CourseElement.CourseTags)
+                {
+                    sBuild.Append(i.Tag + " ");
+                }
+                <p>@sBuild.ToString()</p>
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseElement.Topics)
+        </dt>
+        <dd>*@
+
+            @*Work with Topics
+    @Html.ActionLink("Add topic", "Create", "Topics", routeValues: new { id = Model.CourseElement.ID }, htmlAttributes: null)
+    @Html.ActionLink("Watch topic", "Index", "Topics", routeValues: new { id = Model.CourseElement.ID },htmlAttributes:null)*@
+            @*@Html.ActionLink("Add topic", "Create", "Topics", routeValues: new { id = Model.CourseElement.ID }, htmlAttributes: null)*@
+            @*@if (Model.CourseElement.Topics != null)
+            {
+                foreach (var i in Model.CourseElement.Topics)
+                {
+                    @Html.DisplayName(@i.Title);
+                    @Html.Display(@i.Description)
+                    @Html.ActionLink("Watch topic", "Index", "Topic", new { id = i.ID });
+                }
+            }*@
+        @*</dd>
+    </dl>
+</div>
+<p>
+    
+</p>*@
+

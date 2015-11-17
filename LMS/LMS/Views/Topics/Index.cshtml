@@ -1,0 +1,254 @@
+﻿@model IEnumerable<LMS.Models.Topic>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+@*<table class="table">
+    <tr>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Formula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Finish)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.Raw(item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Formula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Finish)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>*@
+
+@*<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav>
+
+        <div class="collapse navbar-collapse  navbar-ex1-collapse">*@
+    @*<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">*@
+    
+<link href="@Url.Content("~/Content/css/courseStyle.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/round-about.css")" rel="stylesheet" type="text/css">
+<!-- Bootstrap Core CSS -->
+<link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" type="text/css">
+<!-- Bootstrap Core CSS -->
+<link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
+
+<!-- Custom CSS -->
+<link href="@Url.Content("~/Content/css/Profil/sb-admin.css")" rel="stylesheet" type="text/css">
+    
+<!-- Morris Charts CSS -->
+<link href="@Url.Content("~/Content/css/Profil/morris.css")" rel="stylesheet" type="text/css">
+
+<!--login-->
+<link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/css/normalize.css")" rel="stylesheet">
+<!--end login-->
+<link href="@Url.Content("~/Content/css/courseStyle.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/fonts/flaticon.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" type="text/css">
+<!-- Bootstrap Core CSS -->
+<link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
+<!-- Custom CSS -->
+@* <link href="@Url.Content("~/Cont/css/round-about.css")" rel="stylesheet" type="text/css">*@
+<link href="@Url.Content("~/Content/css/landing-page.css")" rel="stylesheet" type="text/css">
+
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:300|Roboto' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- Custom Fonts -->
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">    
+
+
+<div id="wrapper">
+
+    <ul class="nav navbar-nav side-nav text-center">
+        @if (Model != null)
+        {
+        @*<li class="button button-block">@Html.ActionLink(Model.First().Course.Title, "Details", "Courses", new { id = Model.First().Course_ID }, null)</li>*@
+        <li class="btn_topic button-block">@Html.ActionLink(Model.First().Course.Title, "Details", "Courses", new { id = Model.First().Course_ID }, null)</li>
+        foreach (var item in Model)
+        {
+
+            <li class="list-menu">
+                @Ajax.ActionLink(@item.Title, "Details", new { ID = @item.ID }, new AjaxOptions { UpdateTargetId = "page-wrapper" })
+
+            </li>
+
+        }
+        }
+    </ul>
+
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="thumbnail_text_course">
+                    <div class="text_course">
+                        <h2>@Html.Raw(Model.FirstOrDefault().Course.Title)</h2>
+                        <hr>
+                        @Html.Raw(Model.FirstOrDefault().Course.Description)
+
+                    </div>
+                </div>
+                <div class="thumbnail_text_course">
+                    <div class="text_course">
+                        <h2>Теми</h2>
+                        <dl class="dl-horizontal">
+
+                            @if (Model != null)
+                    {
+                        foreach (var topic in Model)
+                        {
+                                    <dt><span class="title_font">@topic.Title: </span></dt>
+                                    <dd>
+                                        @Html.Raw(@topic.Description)
+
+                                    </dd>
+
+                        }
+                    }
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+
+            @*<li>
+                    <a href="#" class="fa fa-plus fa-2x " role="button"></a>
+                </li>*@
+
+            @*<div id="page-wrapper">
+
+                        <div class="container-fluid">
+
+                            <!-- Page Heading -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="page_title text-left">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                            <div class="row">
+                                <div class="col-lg-8">
+
+                                    <div class="thumbnail_text_course">
+                                        <div class="text_course">
+
+
+                                            <span class="fa-lg">
+                                                <i class="fa fa-play-circle-o"></i>
+                                            </span>Lecture one<br>
+                                            <span class="fa-lg">
+                                                <i class="fa fa-file-text "></i>
+                                            </span>Lecture one<br>
+
+                                            <hr>
+                                            <h2><span class="title_font">Labs</span></h2>
+                                            <span class="fa-lg">
+                                                <i class="fa fa-file-word-o"></i>
+                                            </span>Lecture one<br>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="thumbnail_course test_window">
+                                        Upcoming session:
+
+                                        August 10 – September 14
+
+                                        4 weeks of study
+
+                                        Enrollment ends August 18
+
+                                        <hr />
+                                        <a href="#" class="button button-block" role="button">Пройти тест</a>
+
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container-fluid -->
+
+                    </div>
+
+
+
+
+                    <!-- /#page-wrapper -->
+
+                </div>*@
+            <script src="/Content/jquery.js"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="/Content/bootstrap.min.js"></script>
+
+            <!-- Morris Charts JavaScript -->
+            <script src="/Content/js/morris.js"></script>
+            <script src="/Content/js/morris.min.js"></script>
+            <script src="/Content/js/morris-data.js"></script>
+        </div>
+        @Scripts.Render("~/scripts/jquery-1.10.2.js")
+        @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")

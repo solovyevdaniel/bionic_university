@@ -1,0 +1,46 @@
+﻿@model LMS.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Delete";
+}
+<link href="@Url.Content("~/Content/css/table.css")" rel="stylesheet" type="text/css">
+
+
+<div class="header_title">
+<h3>Are you sure you want to delete this User?</h3>
+</div>
+<div class="container">
+<div class="form_style">
+   
+    <table class="ui inverted green table">
+        <tr>
+            <th>
+            Email
+            </th>
+            <th>
+            @Html.DisplayFor(model => model.UserName)
+            </th>
+        </tr>
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-group ">
+        <div class="col-md-offset-4 col-md-4">
+        <input type="submit" value="Видалити" class="btn btn-default" />
+    </div>
+        </div>
+        
+    }
+   
+</div>
+</div>
+
+<nav>
+    <ul class="pager">
+        <li class="previous">@Html.ActionLink("Back to List", "Index")</li>
+        
+    </ul>
+</nav>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<LMS.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Вставити заголовок аррр!</h2>
+
+<p>
+    @Html.ActionLink("Добавити запитання", "Create")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Test.TestTitle)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Issue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnswerId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Test.TestTitle)
+        </td>*@
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Issue)*@
+            @Html.Raw(item.Issue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Answers.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

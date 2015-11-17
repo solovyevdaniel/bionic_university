@@ -1,0 +1,68 @@
+﻿@model LMS.Models.Test
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Test</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Topic.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Topic.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinScore)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CommentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswersByUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnswersByUserId)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Добавити питання", "Create","Questions", new {TestId=@Model.ID}, null)
+</p>

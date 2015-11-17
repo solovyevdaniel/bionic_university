@@ -1,0 +1,128 @@
+﻿@model LMS.Models.GroupViewModel
+@using LMS.Models
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_GroupTest.cshtml";
+}
+
+
+<link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
+@*form design*@
+<link href="@Url.Content("~/Content/css/form_edit.css")" rel="stylesheet" type="text/css">
+
+<div class="header_title">
+   <h4>Група</h4> 
+</div>
+<div class="form_style">
+    <div class="thumbnail_text_course">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Назва")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupData.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Початок занять")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupData.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Кінець занять")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupData.Finish)
+        </dd>
+       
+        <dt>
+            @Html.DisplayName("Курс")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GroupData.Course.Title)
+        </dd>
+        <dt>
+            @Html.Label("Студенти")
+        </dt>
+        <dd>
+            <table class="ui inverted green table">
+                <thead>
+                    <tr>
+                        <th>
+                            Зображення
+                        </th>
+                        <th>
+                            Ім'я
+                        </th>
+                        <th>
+                            Призвіще
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Додано до групи
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{Html.RenderPartial("GroupShared/CoursesUsersPartial", Model.Learners);}
+                </tbody>
+            </table>
+            @if (Model.Learners == null || Model.Learners.Count == 0)
+            {
+                @Html.DisplayName("У групі немає жодного студента");
+            }
+        </dd>
+        <dt>
+            @Html.Label("Викладачі")
+        </dt>
+        <dd>
+            <table class="ui inverted green table">
+                <thead>
+                    <tr>
+                        <th>
+                            Зображення
+                        </th>
+                        <th>
+                            Ім'я
+                        </th>
+                        <th>
+                            Призвіще
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Додано до групи
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{Html.RenderPartial("GroupShared/CoursesUsersPartial", Model.Teachers);}
+                </tbody>
+            </table>
+            @if (Model.Learners == null || Model.Teachers.Count == 0)
+            {
+                @Html.DisplayName("У групі немає жодного викладача");
+            }
+        </dd>
+
+    </dl>
+</div></div>
+
+    <nav>
+        <ul class="pager">
+            <li>@Html.ActionLink("Редагувати", "Edit", new { id = Model.GroupData.ID })</li>
+            <li>@Html.ActionLink("Список груп", "Index")</li>
+            
+        </ul>
+    </nav>        
+  
+

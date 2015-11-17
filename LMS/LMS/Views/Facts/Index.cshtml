@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LMS.Models.Fact>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Групи</h2>
+
+<p>
+    @Html.ActionLink("Створити нову", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Назва")
+        </th>
+        <th>
+            @Html.DisplayName("Початок")
+        </th>
+        <th>
+            @Html.DisplayName("Кінець")
+        </th>
+        <th>
+            @Html.DisplayName("Курс")
+        </th>
+        <th>
+            @Html.DisplayName("Дії")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Finish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Title)
+            </td>
+            <td>
+                @Html.ActionLink("Редагувати", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Інфо", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Видалити", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,36 @@
+﻿@{ 
+    Layout = null;
+}
+
+<div class="modal fade" name="myModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+
+
+        <div class="modal-body">
+
+            <div class="form">
+
+                <ul class="tab-group">
+                    <li class="tab active"><a href="#signup">Sign Up</a></li>
+                    <li class="tab"><a href="#login">Log In</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="signup">
+
+                        @{ Html.RenderPartial("Register", "Account"); }
+                    </div>
+
+                    <div id="login">
+
+                        @{ Html.RenderPartial("Login", "Account");}
+                    </div>
+
+                </div><!-- tab-content -->
+
+            </div> <!-- /form -->
+        </div>
+        <!--login-->
+
+    </div>
+</div>

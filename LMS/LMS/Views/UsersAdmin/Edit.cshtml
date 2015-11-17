@@ -1,0 +1,100 @@
+﻿@model LMS.Models.EditUserViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+<link href="@Url.Content("~/Content/css/semantic.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/semantic.min.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/checkbox.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/checkbox.min.css")" rel="stylesheet" type="text/css">
+
+
+<link href="@Url.Content("~/Content/css/Profil/sb-admin.css")" rel="stylesheet" type="text/css">
+
+<!-- Morris Charts CSS -->
+<link href="@Url.Content("~/Content/css/Profil/morris.css")" rel="stylesheet" type="text/css">
+
+<!--login-->
+<link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/css/normalize.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/fonts/flaticon.css")" rel="stylesheet" type="text/css">
+<!--login-->
+<link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" type="text/css">
+<!-- Bootstrap Core CSS -->
+<link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/courseStyle.css")" rel="stylesheet" type="text/css">
+
+
+<!-- Custom CSS -->
+<link href="@Url.Content("~/Content/css/round-about.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/landing-page.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/bootstrap-datetimepicker.css")" rel="stylesheet" type="text/css">
+
+@*form design*@
+<link href="@Url.Content("~/Content/css/form_edit.css")" rel="stylesheet" type="text/css">
+
+<div class="header_title">
+    
+
+    <h4>Ролі</h4>
+</div>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal form_style">
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.Label("Email:", new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Ролі:", new { @class = "control-label col-md-2" })
+        </div>
+   
+            <div class="form-group">
+                @*@Html.Label("Roles", new { @class = "control-label col-md-2" })*@
+                <div class="col-md-3"></div>
+                <div class="col-md-5">
+                  
+                @foreach (var item in Model.RolesList)
+                {
+                           
+                            @Html.Label(item.Value, new { @class = " fields " })
+                            <input type="checkbox" name="SelectedRole" value="@item.Value" class="checkbox" checked="@item.Selected" />
+                    
+                }
+                        
+        </div>
+                <div class="col-md-4"></div>
+
+
+        </div>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-5">
+                <input type="submit" value="Зберегти" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

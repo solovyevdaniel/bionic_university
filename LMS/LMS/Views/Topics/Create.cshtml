@@ -1,0 +1,96 @@
+﻿@model LMS.Models.Topic
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using LMS.HtmlHelpers
+@Html.AddCKSource("/Scripts/ckeditor/ckeditor.js")
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="/Scripts/bootstrap.js"></script>
+<script src="/Scripts/ImageShow.js"></script>
+<link rel="stylesheet" href="/Scripts/selectize/css/selectize.default.css">
+<link href="@Url.Content("~/Content/css/form_edit.css")" rel="stylesheet" type="text/css">
+<script src="http://brianreavis.github.io/selectize.js/js/selectize.js"></script>
+
+
+<div class="header_title">
+
+    <h4>Створити тему</h4>
+
+</div>
+
+@using (Html.BeginForm("Create", "Topics", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal form_style">
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @*Передача ViewBag*@
+        <input type="hidden" value="@ViewBag.Course_ID" name="Course_ID" />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row">
+            @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @*<input type="text" class="form-control" id="start"  name="Start">*@
+               <input class="form-control text-box single-line" id='start' data-val="false" data-val-date="The field Start must be a date." name="Start" type="datetime" >
+                @*@Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", @id= "start" } })*@
+                @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+            </div>
+           
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Finish, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @*@Html.EditorFor(model => model.Finish, new { htmlAttributes = new { @Value = Model.Start.ToString("MM/dd/yyyy"), @class = "form-control" }, })*@
+                @*@Html.EditorFor(model => model.Finish, new { htmlAttributes = new { @class = "form-control", @id = "finish" } })*@
+                <input class="form-control text-box single-line" id='finish' data-val="false" data-val-date="The field Finish must be a date." name="Finish" type="datetime">
+
+                @Html.ValidationMessageFor(model => model.Finish)
+            </div>
+        </div>
+
+       
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 ">
+                @Html.AddCKWithScript("Description")
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <input type="submit" value="Створити" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+   @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#start").datetimepicker({
+            format: "DD.MM.YYYY HH:mm"
+        })
+    });
+    $(document).ready(function () {
+        $("#finish").datetimepicker({
+            format: "DD.MM.YYYY HH:mm"
+        })
+    });
+</script>
+}

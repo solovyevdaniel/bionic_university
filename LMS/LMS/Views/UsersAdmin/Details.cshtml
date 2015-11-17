@@ -1,0 +1,51 @@
+﻿@model LMS.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="@Url.Content("~/Content/css/table.css")" rel="stylesheet" type="text/css">
+<div class="header_title">
+<h3>Подробиці</h3>
+</div>
+<div class="form_style">
+    
+    <table class="ui inverted green table">
+
+        <tr>
+            <th>
+               Email
+            </th>
+            <th>
+                Ролі
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.UserName)
+            </td>
+        @if (ViewBag.RoleNames.Count == 0)
+        {
+            
+            <td>Не знайдено жодної ролі</td>
+        }
+        @foreach (var item in ViewBag.RoleNames)
+        {
+            
+                <td>
+                    @item
+                </td>
+            
+        }
+        </tr>
+
+
+
+    </table>
+</div>
+
+<nav>
+    <ul class="pager">
+        <li>@Html.ActionLink("Назад", "Index")</li>
+        <li>@Html.ActionLink("Редагувати", "Edit", new { id = Model.Id })</li>
+    </ul>
+</nav>

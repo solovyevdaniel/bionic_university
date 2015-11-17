@@ -1,0 +1,154 @@
+﻿@model LMS.Models.ApplicationUserInfo
+
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="fon_header">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 ">
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="prof-img center-block">
+                                    <img src="@Model.Image" class="img-circle_course center-block" width="160" height="160">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="prof_about center-block">
+                                    <h3>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h3>
+                                    <h6>Email: @Html.DisplayFor(model => model.User.Email)</h6>
+                                    <h6>@Html.DisplayFor(model => model.Birthday)</h6>
+
+                                    @Html.ActionLink("Редагувати", "Edit", new { id = Model.Id })
+                                    <br />
+                                    @Html.ActionLink("Змінити пароль", "ChangePassword", "Manage")
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-3 ">
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4  col-md-4 col-sm-3 ">
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="button_profil button-block" role="button">Мої курси</div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-3 ">
+
+            </div>
+        </div>
+
+
+        <hr />
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
+
+                    @if (@Model.User.Groups.Where(g => g.Name != null).Select(g => g.Course) != null)
+                    {
+
+                        foreach (var item in @Model.User.Groups.Where(g => g.Name != null).Select(g => g.Course))
+                            {
+
+                        <a href="~/Courses/Details/@item.ID" style="text-decoration:none;" class="prof_user_bloc pull-right">
+
+                                <img src="@item.Image" class="prof_cirqle_img" width="120" height="120">
+                        
+                    <div class="prof_text">
+                            <h4>@Html.Raw(@item.Title)</h4>
+                    </div>
+
+
+                            </a>
+                            }
+                        }
+                </div>
+            </div>
+
+        </div>
+      
+    </div>
+@*@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Birthday)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.User.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Birthday)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+            @Html.ActionLink("Details", "Details", new { id= Model.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id= Model.Id })
+        </td>
+    </tr>
+
+</table>*@
+
+
+
+
+
+

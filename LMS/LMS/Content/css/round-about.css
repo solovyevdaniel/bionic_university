@@ -1,0 +1,127 @@
+/*!
+ * Start Bootstrap - Round About HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    padding-top: 50px;
+    background-color:#f8f8f8; /*#f6ebf9;#f8f8f8 Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+    
+
+.cours {
+    text-align:center;
+    padding-top:64px;
+    height:120px;
+margin-left:4px;
+font-size:20px;
+color:dimgray;
+}
+.row_cours {
+margin-left:8%;
+margin-right:8%;
+}
+
+.roz_bloc {
+    color:grey;
+  background:#f8f8f8;
+  border-color:red;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  display: block;
+  margin-top:10%;
+  margin-left:auto;
+  padding: 0.3125em;
+  padding-top:5%;
+  position: relative;
+  width: 95%;
+  height:300px;
+}
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.thumbnail_one {
+    text-align:center;
+    
+    color:gray;
+    margin-left:auto;
+    margin-top:10%;
+    background:#f8f8f8;
+  display: block;
+  width:95%;
+  height:300px;
+  padding: 4px;
+   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background:#B0E5C6;/*#f8f8f8;#f6ebf9;#B0E5C6*/
+  -webkit-transition: border .2s ease-in-out;
+       -o-transition: border .2s ease-in-out;
+          transition: border .2s ease-in-out;
+}
+.up_bloc {
+    z-index:3;
+    background:#00A383;/*#016a66*/
+    margin-top:-44%;
+ display: block;
+ margin-left:-1%;
+  width: 102.5%;
+  height:42%;
+ 
+}
+.down_bloc{
+     display: block;
+  width: 100%;
+  height:50%;
+  text-align:center;
+  
+}
+.text_span{
+    margin-top:20px;
+}
+a:hover {
+background:#35D59D ; /* ÷вет фона под ссылкой#35D59D */ 
+    color: #fff;
+    text-decoration:none;
+}
+
+.badge-img {
+   z-index:4; 
+  background:#00A383;
+  margin-top:5%;
+  border-radius:50%;
+  display: block;
+  width:176px;
+  height:176px;
+ 
+  
+ 
+}
+.bord_img{ border-style:solid;
+  border-width:5px;
+  border-color:#fff;}
+
+.img-circle {
+    position:absolute;
+    margin-top:3px;
+    margin-left:0.8%;
+
+    
+  border-radius: 50%;
+  border-style:solid;
+  border-width:5px;
+  border-color:#fff;
+}
+.img-center {
+	margin: 0 auto;
+  
+}
+
+footer {
+    margin: 50px 0;
+}

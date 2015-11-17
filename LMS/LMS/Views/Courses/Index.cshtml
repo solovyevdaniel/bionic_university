@@ -1,0 +1,142 @@
+﻿
+@model LMS.Models.CourseSearchViewModel
+@using System.Text
+@using LMS.HtmlHelpers
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_landing.cshtml";
+}
+
+
+@*@Html.Action("SearchIndex")
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Image")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Courses.ElementAt(0).Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Courses.ElementAt(0).Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Courses.ElementAt(0).Formula)
+        </th>
+        <th>
+            @Html.DisplayName("Tag")
+        </th>
+        <th></th>
+    </tr>
+
+@for (Int32 i = 0; i < Model.Courses.Count(); i++)
+{ 
+    <tr>
+        <td>
+            <img src="@Model.Courses.ElementAt(i).Image" height="100" width="100"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Courses.ElementAt(i).Title)
+
+        </td>
+        <td>
+            @Html.Raw(Model.Courses.ElementAt(i).Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Courses.ElementAt(i).Formula)
+        </td>
+        <td>
+            @if (Model.Courses.ElementAt(i).CourseTags != null)
+            {
+                StringBuilder sBuild = new StringBuilder();
+                foreach (var tag in Model.Courses.ElementAt(i).CourseTags)
+                {
+                    sBuild.Append(tag.Tag + " ");
+                }
+                @Html.DisplayName(sBuild.ToString());
+            }
+        </td>
+        <td>
+            @if (User.IsInRole("Admin") || User.IsInRole("CourseManager"))
+            { 
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Courses.ElementAt(i).ID }) 
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Courses.ElementAt(i).ID }) 
+            }
+            
+            @Html.ActionLink("Details", "Details", new { id = Model.Courses.ElementAt(i).ID })
+        </td>
+    </tr>
+}
+</table>*@
+
+
+
+@*Блоки каталог курсів*@
+<div class="container">
+    <div class="row">
+
+
+        
+
+        @*Колонка курсу*@
+
+        @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <a href="#" class="thumbnail_catalog">
+                <div class="catalog-img center-block">
+                    <img src="@Model.Courses.ElementAt(i).Image"  class="img-circle center-block" width="160" height="160">
+                </div>
+                <div class="text-center">
+                    <h3></h3>
+                    <div class="up_bloc">
+                    </div>
+
+
+                    <h3> <span class=" text_hover"></span></h3>
+
+                </div>
+            </a>
+        </div>*@
+@for (Int32 i = 0; i < Model.Courses.Count(); i++)
+{
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <a href="~/Courses/Details/@Model.Courses.ElementAt(i).ID" style="text-decoration:none;" class="thumbnail_one">
+                <div class="badge-img center-block">
+                    <img src="@Model.Courses.ElementAt(i).Image" class="img-circle center-block" width="169" height="169">
+                </div>
+
+                <div class="up_bloc">
+
+                </div>
+                <h2>@Html.DisplayFor(modelItem => Model.Courses.ElementAt(i).Title)</h2>
+                
+            </a>
+        </div>
+}
+        @if (User.IsInRole("Admin") || User.IsInRole("CourseManager"))
+        {
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <a href="~/Courses/Create/" style="text-decoration:none;" class="thumbnail_one">
+                <div class="badge-img center-block">
+                    <img src="~/Content/img/ww.png" class="img-circle center-block" width="169" height="169">
+                </div>
+                <div class="up_bloc">
+
+                </div>
+                <h3>Новий курс</h3>
+            </a>
+        </div>
+        }
+
+
+    </div>
+
+</div><nav>
+    <ul class="pager">
+        <li>@Html.AddPageLinks(Model.PInfo, "btn btn-primary active", x => Url.Action("Index", new { currentPage = x - 1 }))</li>
+        
+    </ul>
+</nav>

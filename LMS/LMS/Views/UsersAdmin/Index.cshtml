@@ -1,0 +1,64 @@
+﻿@model IEnumerable<LMS.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Адміністратор";
+}
+<link href="@Url.Content("~/Content/css/Profil/sb-admin.css")" rel="stylesheet" type="text/css">
+
+<!-- Morris Charts CSS -->
+<link href="@Url.Content("~/Content/css/Profil/morris.css")" rel="stylesheet" type="text/css">
+
+<!--login-->
+<link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/css/normalize.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/fonts/flaticon.css")" rel="stylesheet" type="text/css">
+<!--login-->
+<link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" type="text/css">
+<!-- Bootstrap Core CSS -->
+<link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/courseStyle.css")" rel="stylesheet" type="text/css">
+
+
+<!-- Custom CSS -->
+<link href="@Url.Content("~/Content/css/landing-page.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/bootstrap-datetimepicker.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/table.css")" rel="stylesheet" type="text/css">
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<div class="header_title">
+    <h3>Адміністрування</h3>
+</div>
+<div class="container">
+    <div class="form_style">
+        <table class="ui inverted green table">
+            <tr>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Подробиці
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                     <button class="btn btn-default btn-sm"> @Html.ActionLink("Редагувати", "Edit", new { id = @item.Id }) </button> |
+                       <button class="btn btn-default btn-sm"> @Html.ActionLink("Подробиці", "Details", new { id = @item.Id })</button> |
+                        <button class="btn btn-default btn-sm"> @Html.ActionLink("Видалити", "Delete", new { id = @item.Id })</button>
+</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+

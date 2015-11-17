@@ -1,0 +1,128 @@
+﻿@model LMS.Models.Fact
+
+@{
+    ViewBag.Title = "Create";
+}
+@using LMS.HtmlHelpers
+@Html.AddCKSource("/Scripts/ckeditor/ckeditor.js")
+<script src="/Scripts/jquery-1.10.2.js"></script>
+<script src="/Scripts/bootstrap.js"></script>
+<script src="/Scripts/ImageShow.js"></script>
+<script src="@Url.Content("~/Scripts/CourseInputCheck.js")"></script>
+<link href="@Url.Content("~/Content/css/form_edit.css")" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/Scripts/selectize/css/selectize.default.css">
+<script src="http://brianreavis.github.io/selectize.js/js/selectize.js"></script>
+
+
+@using (Html.BeginForm("Create", "Facts", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    <div class="header_title">
+        <h4>Створити подію</h4>
+    </div>
+    <div class="form-horizontal form_style">
+        
+        @Html.HiddenFor(model => model.ID)
+        <input type="hidden" value="@ViewBag.Topic_ID" name="Topic_ID" />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                @Html.AddCKWithScript("Description")
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FactType_ID, "Тип події", htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.DropDownList("FactType_ID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FactType_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">Створити власний тип</label>
+            <div class="col-md-6">
+                @*@Html.EditorFor(model => model.FactType.Name, new { htmlAttributes = new { @class = "form-control" }})*@
+               @Html.Editor("nameOfNewFactType", "nameOfNewFactType", new { htmlAttributes = new { @class = "form-control" } })
+                <p>@ViewBag.Message</p>
+            </div>
+        </div>
+
+        @*Add links to FactLinks by filed "name" in tag <input>*@
+        <div id="linkBlock">
+
+            <section>
+                <div class="form-group">
+                    <label class="control-label col-md-4">Посилання</label>
+                    <div class="col-md-6">
+                        <input type="text" name="FactLinks[0].link" class="form-control" /><a href="#" class="remScnt">Видалити</a>
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-6">
+                <input class="addLink btn btn-default" type="button" value="Додати посилання">
+            </div>
+        </div>
+
+        @* Add files to FactFiles by field "name" in tag <input>*@
+        <div class="form-group">
+
+            <label class="control-label col-md-4">Додати файл</label>
+            @* @Html.Label("Add file", new { @class = "control-lable col-md-2" })*@
+            <div class="col-md-6" style="border-radius:7px;"><div>
+                <input style="border:none;" type="file" name="file" id="file"  />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-4">
+                <input type="submit" value="Створити" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    
+    
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            var i = 0;
+            $('.addLink').click(function () {
+                i++;
+                var html2Add = "<section><div class='form-group'><label class='control-label col-md-4'>Посилання</label><div class='col-md-6'><input type='text' name='FactLinks[" + i + "].link' class='form-control'/><a href='#' class='remScnt'>Видалити</a></div></div></section>";
+                $('#linkBlock').append(html2Add);
+                $('.remScnt').on('click', deleteIt);
+            });
+            $('.remScnt').on('click', deleteIt);
+            function deleteIt(e) {
+                $(this).closest('section').remove();
+                return false;
+             };
+        });
+    </script>
+}

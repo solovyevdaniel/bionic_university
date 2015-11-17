@@ -1,0 +1,56 @@
+﻿@model System.Collections.Generic.Dictionary<LMS.Models.ApplicationUser, Boolean>
+@if (Model != null)
+{
+
+    foreach (var user in Model)
+    {
+        <tr>
+           
+             <td>
+                     @if (user.Key.UserInfo.Image != null)
+                     {
+                        <img src="@user.Key.UserInfo.Image" width="50" height="50" />
+                     }
+                     else
+                     {
+                         <img src="/images/easyStudy.jpg" width="50" height="50" />
+                     }
+                </td>
+                <td>
+                    @if (user.Key.UserInfo.FirstName != null)
+                    {
+                        @user.Key.UserInfo.FirstName
+                    }
+                    else
+                    {
+                        @:Unknown
+                    }
+                </td>
+                <td>
+                    @if (user.Key.UserInfo.FirstName != null)
+                    {
+                        @user.Key.UserInfo.LastName
+                    }
+                    else
+                    {
+                        @:Unknown
+                    }
+                </td>
+            <td>
+                @user.Key.Email
+            </td>
+            <td>
+                @if (user.Value)
+                { 
+                    <input type="checkbox" name="@ViewBag.Names" value="@user.Key.UserName" checked style="height: 20px; width: 20px;"/>
+                }
+                else
+                {
+                    <input type="checkbox" name="@ViewBag.Names" value="@user.Key.UserName" style="height: 20px; width: 20px;" />
+                }
+            </td>
+        </tr>
+    }
+}
+
+

@@ -1,0 +1,100 @@
+﻿@model LMS.Models.Fact
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
+@*form design*@
+<link href="@Url.Content("~/Content/css/form_edit.css")" rel="stylesheet" type="text/css">
+<div class="header_title">
+
+    <h3>@Html.DisplayFor(model => model.Title)</h3>
+</div>
+    <div class="form-horizontal form_style">
+        <div class="thumbnail_text_course">
+           
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <span>Тип</span>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FactType.Name)
+                </dd>
+
+                <dt>
+                    <span>Тема</span>
+                </dt>
+
+                <dd>
+
+                    @Html.DisplayFor(model => model.Topic.Title)
+                </dd>
+
+                @*<dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>*@
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.Raw(Model.Description)
+                </dd>
+
+                @* Links *@
+                <dt>
+                    Посилання
+                </dt>
+                <dd>
+                    @if (Model.FactLinks.Count() > 0)
+            {
+                        <ul>
+                            @foreach (var item in Model.FactLinks)
+                            {
+                                <li>
+                                    <a href="@item.Link" target="_blank">@item.Link</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </dd>
+
+                @* Files *@
+
+                <dt>
+                    Файли
+                </dt>
+
+
+                <dd>
+
+                    @if (Model.FactLinks.Count() > 0)
+            {
+                        <ul>
+                            @foreach (var item in Model.FactUploadFiles)
+                            {
+                                <li>
+                                    <a href="@item.UploadFile" download>@ViewBag.STRING</a>
+                                </li>
+
+                            }
+                        </ul>
+                    }
+
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @*@Html.ActionLink("Видалити", "Delete", new { id = Model.ID })*@
+
+        </p>
+        </div>

@@ -1,0 +1,176 @@
+﻿@model LMS.Models.Group
+<script src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")"></script>
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_GroupTest.cshtml";
+}
+
+@*form design*@
+<link href="@Url.Content("~/Content/bootstrap-datetimepicker.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/form_edit.css")" rel="stylesheet" type="text/css">
+<script src="@Url.Content("~/Scripts/courseManagerScripts/AddAllJoinedUsers.js")"></script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="header_title">
+        <h4>Редагувати групу</h4>
+    </div>
+    
+    <div class="form-horizontal form_style">
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Course_ID)
+        @Html.HiddenFor(model => model.UserState_ID)
+        @Html.Hidden("lWatched", false, new { id = "lWatched" })
+        @Html.Hidden("tWatched", false, new { id = "tWatched" })
+
+         <div class="form-group">
+            <div class="col-md-10">
+                @if (ViewBag.Error != null)
+                {
+                    @Html.DisplayName(ViewBag.Error as String);
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Назва", new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Курс", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DisplayFor(model => model.Course.Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Початок занять", new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                <input class="form-control text-box single-line" id='start' data-val="false" data-val-date="The field Start must be a date." name="Start" type="datetime" value="@Model.Start">
+                @Html.ValidationMessageFor(model => model.Start)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Кінець занять", new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                <input class="form-control text-box single-line" id='finish' data-val="false" data-val-date="The field Finish must be a date." name="Finish" type="datetime" value="@Model.Finish">
+                @Html.ValidationMessageFor(model => model.Finish)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.Label("Учні", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input  class="btn btn-default btn-sm"  type="button" value="Учні" id="addUsers" />
+                <input class="btn btn-default btn-sm" type="button" value="Зховати" id="hideLearners" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            
+            <div class="col-md-offset-2 col-md-10">
+                
+                <table id="users" class="ui inverted green table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Зображення
+                            </th>
+                            <th>
+                                Ім'я
+                            </th>
+                            <th>
+                                Призвіще
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Додати до групи
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <img id="uloading" src="@Url.Content("~/Content/img/loading.gif")" width="100" height="100" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Викладачі", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="btn btn-default btn-sm" type="button" value="Викладачі" id="addTeachers" />
+                <input class="btn btn-default btn-sm" type="button" value="Зховати" id="hideTeachers" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+
+                <table id="teachers" class="ui inverted green table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Зображення
+                            </th>
+                            <th>
+                                Ім'я
+                            </th>
+                            <th>
+                                Призвіще
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Додати до групи
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <img id="tloading" src="@Url.Content("~/Content/img/loading.gif")" width="100" height="100" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3">
+                <input type="submit" value="Зберегти" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<nav>
+    <ul class="pager">
+        <li class="previous">@Html.ActionLink("Список груп", "Index")</li>
+        
+    </ul>
+</nav>   
+   
+
+
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#start").datetimepicker({
+            format: "DD.MM.YYYY HH:mm"
+        })
+    });
+    $(document).ready(function () {
+        $("#finish").datetimepicker({
+            format: "DD.MM.YYYY HH:mm"
+        })
+    });
+    </script>

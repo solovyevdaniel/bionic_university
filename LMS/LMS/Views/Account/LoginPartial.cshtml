@@ -1,0 +1,36 @@
+﻿@using LMS.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/css/normalize.css")" rel="stylesheet">
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="field-wrap">
+        <label>
+            Email 
+        </label>
+        @Html.TextBoxFor(m => m.Email, new { @class = "req" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+                        <div class="field-wrap">
+                            @Html.LabelFor(m => m.Password, new { @class = "req" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "req" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="field-wrap">
+
+                            <input type="submit" value="Увійти" class="button button-block" />
+
+                        </div>
+                        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jq..'></script>
+                        <script src="~/Content/js/index.js"></script>
+}
+

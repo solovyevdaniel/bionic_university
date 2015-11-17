@@ -1,0 +1,15 @@
+﻿@model LMS.Models.ApplicationUser
+@{
+    ViewBag.Title = "Join";
+}
+@if (ViewBag.State)
+{ 
+    <p> Hello , @Model.UserName, thanks for your joining :)</p>
+    <p>Please, wait for your acception. We will write you an email :)</p>
+}
+else
+{
+    <p> Hello , @Model.UserName. Please be patient.</p>
+    <p>Please, wait for your acception</p>
+}
+@Html.ActionLink("return to courses list", "Index")

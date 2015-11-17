@@ -1,0 +1,173 @@
+﻿@model LMS.Models.Topic
+@{ 
+    Layout = null;
+}
+
+<link href="@Url.Content("~/Content/css/Profil/jquery-ui.css")" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="@Url.Content("~/Content/css/Profil/sb-admin.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/table.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/table.min.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/semantic.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/semantic.min.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/checkbox.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/Profil/checkbox.min.css")" rel="stylesheet" type="text/css">
+
+<!-- Morris Charts CSS -->
+<link href="@Url.Content("~/Content/css/Profil/morris.css")" rel="stylesheet" type="text/css">
+<!--login-->
+<link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/css/normalize.css")" rel="stylesheet">
+<!--end login-->
+<link href="@Url.Content("~/Content/css/courseStyle.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/fonts/flaticon.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" type="text/css">
+<!-- Bootstrap Core CSS -->
+<link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
+<div class="container-fluid">
+
+
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+@if (Model.Facts != null)
+{
+            <div class="thumbnail_text_course">
+                <div class="text_course">
+
+                    <h2><span class="title_font">Лабораторні роботи</span></h2>
+                    
+                    @foreach (var item in @Model.Facts.Where(t => t.FactType.Name == "Лабораторна робота"))
+                    {
+                        <span class="fa-lg">
+                            <i class="fa fa-file-text "></i>
+                        </span>
+                        @Html.ActionLink(@item.Title, "Details", "Facts", new { id = item.ID },null)
+                    <br />
+                    @Html.Raw(@item.Description) <br />
+                    @*@item.FactLinks*@
+
+                    }
+                    
+                    
+                    <br>
+
+                    <hr>
+                    <h2><span class="title_font">Лекції</span></h2>
+                    
+                    @foreach (var item in @Model.Facts.Where(t => t.FactType.Name == "Лекція"))
+                    {
+
+                        <span class="fa-lg">
+                            <i class="fa fa-play-circle-o"></i>
+                        </span>
+                    @Html.ActionLink(@item.Title, "Details", "Facts", new { id = item.ID }, null)
+                        <br />
+                        @Html.Raw(@item.Description) <br />
+
+                    @*@item.FactLinks*@
+
+                    }
+                    <br>
+
+                    <hr>
+                    <h2><span class="title_font">Додаткова інформація</span></h2>
+
+                    @foreach (var item in @Model.Facts.Where(t => t.FactType.Name != "Лекція").Where(t => t.FactType.Name != "Лабораторна робота"))
+                    {
+
+                        <span class="fa-lg">
+                            <i class="fa fa-play-circle-o"></i>
+                        </span>
+                        @Html.ActionLink(@item.Title, "Details", "Facts", new { id = item.ID }, null)
+                        <br />
+                        @Html.Raw(@item.Description) <br />
+
+                        @*@item.FactLinks*@
+
+                    }
+                </div >
+            </div >
+}
+            <div class="thumbnail_text_course">
+
+                <div class="text_course">
+                    <dl class="dl-horizontal">
+                        <dt><span class="title_font">@Html.DisplayNameFor(model => model.Title)</span></dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Title)
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt><span class="title_font">@Html.DisplayNameFor(model => model.Description)</span></dt>
+                        <dd>
+                            @Html.Raw(Model.Description)
+                        </dd>
+                  
+                    </dl><dl class="dl-horizontal">
+@if (Model.Start != null)
+{
+                        <dt><span class="title_font">@Html.DisplayNameFor(model => model.Start)</span></dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Start)
+                        </dd>
+}
+                    </dl>
+                   
+                    <dl class="dl-horizontal">
+                        @if (Model.Finish != null)
+                        {
+
+                            <dt><span class="title_font">@Html.DisplayNameFor(model => model.Finish)</span></dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Finish)
+                            </dd>
+
+                        }
+                    </dl>
+                </div>
+                @if (!User.IsInRole("Learner"))
+                {
+                    <nav>
+                        <ul class="pager">
+                            <li>@Html.ActionLink("Додати подію", "Create", "Facts", new { id = Model.ID }, null)</li>
+                            <li>@Html.ActionLink("Редагувати тему", "Edit", new { id = Model.ID }, null)</li>
+                            <li>@Html.ActionLink("Видалити тему", "Delete", new { id = Model.ID }, null)</li>
+                            
+                        </ul>
+                    </nav>
+                    @*@Html.ActionLink("Редагувати тему","Edit", new { id = Model.ID}, null)
+                    <span>||</span>
+                    @Html.ActionLink("Видалити тему","Delete", new { id = Model.ID}, null)
+                    <br />
+                    @Html.ActionLink("Додати подію", "Create", "Facts", new { id = Model.ID }, null)*@
+                }
+            </div>
+
+        </div>
+        @*<div class="col-lg-4">
+            <div class="thumbnail_course test_window">
+                Upcoming session:
+
+                August 10 – September 14
+
+                4 weeks of study
+
+                Enrollment ends August 18
+
+                <hr />
+                <a href="#" class="button button-block" role="button">Пройти тест</a>
+
+
+
+            </div>
+
+        </div>*@
+
+
+
+    </div>
+    <!-- /.row -->
+</div>

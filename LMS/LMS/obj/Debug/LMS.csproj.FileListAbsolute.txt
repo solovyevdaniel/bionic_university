@@ -1,0 +1,24 @@
+D:\worksp\Development\LMS\LMS\bin\LMS.dll.config
+D:\worksp\Development\LMS\LMS\bin\LMS.dll
+D:\worksp\Development\LMS\LMS\bin\LMS.pdb
+D:\worksp\Development\LMS\LMS\bin\System.Web.Mvc.dll
+D:\worksp\Development\LMS\LMS\bin\System.Web.Mvc.xml
+D:\worksp\Development\LMS\LMS\obj\Debug\LMS.csprojResolveAssemblyReference.cache
+D:\worksp\Development\LMS\LMS\obj\Debug\LMS.dll
+D:\worksp\Development\LMS\LMS\obj\Debug\LMS.pdb
+L:\BU Summer Camp\BU HALK Team Project\Development\LMS\LMS\bin\LMS.dll.config
+L:\BU Summer Camp\BU HALK Team Project\Development\LMS\LMS\bin\LMS.dll
+L:\BU Summer Camp\BU HALK Team Project\Development\LMS\LMS\bin\LMS.pdb
+L:\BU Summer Camp\BU HALK Team Project\Development\LMS\LMS\bin\System.Web.Mvc.dll
+L:\BU Summer Camp\BU HALK Team Project\Development\LMS\LMS\bin\System.Web.Mvc.xml
+L:\BU Summer Camp\BU HALK Team Project\Development\LMS\LMS\obj\Debug\LMS.dll
+L:\BU Summer Camp\BU HALK Team Project\Development\LMS\LMS\obj\Debug\LMS.pdb
+L:\BU Summer Camp\BU HALK Team Project\Development\LMS\LMS\obj\Debug\LMS.csprojResolveAssemblyReference.cache
+D:\bionic\100\Final Project\LMS\LMS\bin\LMS.dll.config
+D:\bionic\100\Final Project\LMS\LMS\bin\LMS.dll
+D:\bionic\100\Final Project\LMS\LMS\bin\LMS.pdb
+D:\bionic\100\Final Project\LMS\LMS\bin\System.Web.Mvc.dll
+D:\bionic\100\Final Project\LMS\LMS\bin\System.Web.Mvc.xml
+D:\bionic\100\Final Project\LMS\LMS\obj\Debug\LMS.csprojResolveAssemblyReference.cache
+D:\bionic\100\Final Project\LMS\LMS\obj\Debug\LMS.dll
+D:\bionic\100\Final Project\LMS\LMS\obj\Debug\LMS.pdb

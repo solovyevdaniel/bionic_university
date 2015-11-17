@@ -1,0 +1,57 @@
+﻿@model LMS.Models.Fact
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<link href="@Url.Content("~/Content/css/form_edit.css")" rel="stylesheet" type="text/css">
+<div class="header_title">
+
+
+    <h4>Ви впевненні, що хочете видалити цю тему?</h4>
+</div>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Тип події")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FactType.Name)
+        </dd>
+
+        <dt>
+            @Html.Label("Тема")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Topic.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" />
+            @*@Html.ActionLink("Back to List", "Index")*@
+        </div>
+    }
+</div>

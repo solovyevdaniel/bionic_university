@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "_GroupTest";
+}
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/css/Reset.css")" rel="stylesheet" type="text/css">
+    @Scripts.Render("~/Content/css")
+    <!-- Custom CSS -->
+    <!--login-->
+    
+    <!--login-->
+    <link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" type="text/css">
+    <!-- Bootstrap Core CSS -->
+    <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/Content/css/courseStyle.css")" rel="stylesheet" type="text/css">
+
+
+    <!-- Custom CSS -->
+    @*<link href="@Url.Content("~/Content/css/round-about.css")" rel="stylesheet" type="text/css">*@
+    <link href="@Url.Content("~/Content/css/landing-page.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/Content/bootstrap-datetimepicker.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/Content/css/form_edit.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/Content/css/table.css")" rel="stylesheet" type="text/css">
+
+
+    @*<link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css" />*@
+
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/jqueryui")*@
+    @Scripts.Render("~/bundles/modernizr")
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="/Scripts/ImageShow.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="~/Home/Index"><i class="fa fa-mortar-board fa-2x"></i>Easy Study. Light</a>
+                @*<i class="fa fa-mortar-board fa-2x">@Html.ActionLink("Easy Study. Light", "Index", "Home")</i>*@
+
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        @Html.ActionLink("Головна", "Index", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Курси", "Index", "Courses")
+                    </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>
+                            @Html.ActionLink("Адміністрування", "Index", "UsersAdmin")
+                        </li>
+                    }
+                    <li>
+                        @Html.Partial("_LoginPartial")
+                        @*@Html.ActionLink("Вхід", "About")*@
+                    </li>
+
+                </ul>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+   
+
+    @RenderBody()
+
+
+    <!-- jQuery -->
+    @*<script src="~/Content/js/jquery.js"></script>*@
+
+    <!-- Bootstrap Core JavaScript -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetime")
+    @Scripts.Render("~/Scripts/jquery-ui-1.11.4.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>
+
+
